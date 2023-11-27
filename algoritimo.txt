@@ -9,5 +9,8 @@
 # Status da Etapa 02: Concluído; Data: 27/11/23.
 
 # Etapa 03: Desenvolver esse algorítimo em código python usando programação orientada a objeto, implementando de forma que o mesmo código possa ser utilizado em todas as áreas até o fim do jogo, e estruturando uma tela principal e uma tela para as batalhas.
+# Extra: Iniciar no gitHub:
+
+# Status Extra: Concluido; data: 27/11/23.
 
 # Status da Etapa 03: Pendente...
