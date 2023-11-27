@@ -4,7 +4,7 @@
 
 # Status da Etapa 01: Concluído; Data: 27/11/23.
 
-# Etapa 02: Construir regras de uma estrutura para cada área dessas 30, de forma que seja gerado desafios ao jogodor durante a sua passagem pelo mapa. Lembrar que as regras devem ser feitas de forma que faça com que o personagem possa se desenvolver durante cada área.
+# Etapa 02: Construir regras de uma estrutura para cada área dessas 30, de forma que seja gerado desafios ao jogador durante a sua passagem pelo mapa. Lembrar que as regras devem ser feitas de forma que faça com que o personagem possa se desenvolver durante cada área.
 
 # Status da Etapa 02: Concluído; Data: 27/11/23.
 
