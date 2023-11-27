@@ -1,0 +1,13 @@
+# ALgorítimo para especificar cada etapa do projeto
+
+# Etapa 01: Fazer o mapa preliminar com 30 areas, cada uma disposta em ordem crescente, de forma que possa ser usado como um guia durante o jogo.
+
+# Status da Etapa 01: Concluído; Data: 27/11/23.
+
+# Etapa 02: Construir regras de uma estrutura para cada área dessas 30, de forma que seja gerado desafios ao jogodor durante a sua passagem pelo mapa. Lembrar que as regras devem ser feitas de forma que faça com que o personagem possa se desenvolver durante cada área.
+
+# Status da Etapa 02: Concluído; Data: 27/11/23.
+
+# Etapa 03: Desenvolver esse algorítimo em código python usando programação orientada a objeto, implementando de forma que o mesmo código possa ser utilizado em todas as áreas até o fim do jogo, e estruturando uma tela principal e uma tela para as batalhas.
+
+# Status da Etapa 03: Pendente...
