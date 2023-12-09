@@ -1,42 +1,47 @@
-from kivy.app import App
-from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.scrollview import ScrollView
+from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
-from kivy.clock import Clock
+from kivy.uix.screenmanager import Screen, ScreenManager
+from kivy.app import App
+from kivy.uix.screenmanager import WipeTransition
 
+class InitialScreen(Screen):
+    def __init__(self, **kwargs):
+        super(InitialScreen, self).__init__(**kwargs)
+        self.name = "initialscreen"
+        self.rel_layout = RelativeLayout(size_hint=(1, 1))
 
-class TelaInicial(Screen):
+        self.scroll_view = ScrollView(size_hint=(1, 1), do_scroll_x=False, do_scroll_y=True)
+
+        self.label = Label(text='', font_size='20sp', size_hint_y=None, valign='top')
+
+        self.scroll_view.add_widget(self.label)
+        self.rel_layout.add_widget(self.scroll_view)
+
+        self.button = Button(text='Iniciar Aventura!', size_hint=(0.5, 0.1), pos_hint={'center_x': 0.5, 'center_y': 0.5}, on_release=self.screen_change)
+        self.rel_layout.add_widget(self.button)
+        self.add_widget(self.rel_layout)
+
+    def screen_change(self, instance):
+        self.manager.current = "interactivescreen"
+
+class InteractiveScreen(Screen):
     def __init__(self,**kwargs):
-        super(TelaInicial,self).__init__(**kwargs)
-        self.box = BoxLayout(orientation='horizontal')
-        self.button = Button(text='Iniciar Aventura!',on_release=self.adicionar_label)
-        self.box.add_widget(self.button)
-        self.add_widget(self.box)
-    
-    def adicionar_label(self,instancia):
-        texto = ''' Pronto para iniciar uma aventura nesse mundo onde todo seu sucesso só depende das suas escolhas?\nAqui nesse mundo você irá ver o benefício do esforço e da perseverança. Aqui nada lhe será dado, \nporém seu esforço lhe dará os resultados procurados! \nAqui você irá reviver o seu dom da leitura. Aqui você aprender a dominar \ndons que nem sabia que estavam dormentes em você.'''
-        
-        self.caracteres = texto
+        super(InteractiveScreen,self).__init__(**kwargs)
+        self.name = "interactivescreen"
 
-        self.box.remove_widget(self.button)
-        self.label = Label(text=f"{texto}")
-        self.box.add_widget(self.label)
-        
-
-class Gerenciador(ScreenManager):
-    def __init__(self,**kwargs):
-        super(Gerenciador,self).__init__(**kwargs)
-        self.tela_inicial = TelaInicial()
-        self.add_widget(self.tela_inicial)
-    
-
-class RPG_Texto(App):
+class RPGTextApp(App):
     def build(self):
-        return Gerenciador()
+        sm = ScreenManager(transition=WipeTransition())
+        self.initial_screen = InitialScreen()
+        self.interactive_screen = InteractiveScreen()
+        sm.add_widget(self.initial_screen)
+        sm.add_widget(self.interactive_screen)
 
+        return sm
 
-if __name__ == '__main__': 
-    aplicação = RPG_Texto()
-    aplicação.run()
+if __name__ == '__main__':
+    app = RPGTextApp()
+    app.run()
 
