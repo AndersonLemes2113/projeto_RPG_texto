@@ -41,7 +41,7 @@ class InteractiveScreen(Screen):
         self.add_widget(box_text)
         self.words = self.text_font.split()
         self.current_word_index = 0  # índice da palavra atual
-        Clock.schedule_once(self.add_next_word, 0.5)  # agendar a adição da primeira palavra após 2 segundos
+        Clock.schedule_once(self.add_next_word, 0.5)  # agendar a adição da primeira palavra após 0.5 segundos
     
     def add_next_word(self, dt):
         if self.current_word_index < len(self.words):
@@ -51,7 +51,7 @@ class InteractiveScreen(Screen):
                 self.text_label.text += '\n'  # Adiciona uma nova linha
             self.text_label.text += word + ' '  # Adiciona a palavra
             self.current_word_index += 1
-            Clock.schedule_once(self.add_next_word, 0.5)  # Agendar a adição da próxima palavra após 2 segundos
+            Clock.schedule_once(self.add_next_word, 0.5)  # Agendar a adição da próxima palavra após 0.5 segundos
 
 class RPGTextApp(App):
     def build(self):
