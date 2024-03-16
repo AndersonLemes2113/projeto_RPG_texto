@@ -35,7 +35,7 @@ class InteractiveScreen(Screen):
         self.show_text_onScreen()
 
     def show_text_onScreen(self):
-        self.text_font = """O sombrio poder do jovem Malbordus está chegando a seu ápice. Os elfos que o criaram \natribuíram-lhe uma tarefa final: reaver os cinco artefatos do Dragão escondidos por séculos\n na cidade perdida de Vatos, em algum lugar no Deserto dos Crânios. Somente quando os tiver \nem seu poder ele será capaz e rebelar-se e submeter Allansia. Cada dia que passa o aproxima \nmais desse objetivo, e somente VOCÊ pode detê-lo!"""
+        self.text_font = "O sombrio poder do jovem Malbordus está chegando a seu ápice. Os elfos que o criaram \natribuíram-lhe uma tarefa final: reaver os cinco artefatos do Dragão escondidos por séculos\n na cidade perdida de Vatos, em algum lugar no Deserto dos Crânios. Somente quando os tiver \nem seu poder ele será capaz e rebelar-se e submeter Allansia. Cada dia que passa o aproxima \nmais desse objetivo, e somente VOCÊ pode detê-lo!"
         self.text_label = Label(text='', halign='left')
         self.box_text = BoxLayout(orientation='vertical')
         self.box_text.add_widget(self.text_label)
