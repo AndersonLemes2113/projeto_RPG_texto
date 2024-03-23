@@ -8,6 +8,7 @@ from kivy.app import App
 from kivy.uix.screenmanager import WipeTransition
 from kivy.clock import Clock
 
+
 class InitialScreen(Screen):
     def __init__(self, **kwargs):
         super(InitialScreen, self).__init__(**kwargs)
@@ -21,12 +22,14 @@ class InitialScreen(Screen):
         self.scroll_view.add_widget(self.label)
         self.rel_layout.add_widget(self.scroll_view)
 
-        self.button = Button(text='Iniciar Aventura!', size_hint=(0.5, 0.1), pos_hint={'center_x': 0.5, 'center_y': 0.5}, on_release=self.screen_change)
+        self.button = Button(text='Iniciar Aventura!', size_hint=(0.5, 0.1),
+                             pos_hint={'center_x': 0.5, 'center_y': 0.5}, on_release=self.screen_change)
         self.rel_layout.add_widget(self.button)
         self.add_widget(self.rel_layout)
 
     def screen_change(self, instance):
         self.manager.current = "interactivescreen"
+
 
 class TextsFound:
     def __init__(self, file):
@@ -37,6 +40,7 @@ class TextsFound:
             texts = [t.strip() for t in f.readlines() if t.strip()]
 
         return texts
+
 
 class InteractiveScreen(Screen):
     def __init__(self, **kwargs):
@@ -49,30 +53,36 @@ class InteractiveScreen(Screen):
         self.texts = self.text_font.search_text()
         self.text_label = Label(text='', halign='left')
         self.box_text = BoxLayout(orientation='vertical')
+        self.limit_line = 50
+        self.cont_limit = 0
         self.box_text.add_widget(self.text_label)
         self.add_widget(self.box_text)
-        self.current_word_index = 0  # índice da palavra atual
-        self.cont_letters = 0
-        Clock.schedule_once(self.add_next_word, 3)  # agendar a adição da primeira palavra após 3 segundos
+        Clock.schedule_once(self.add_next_word, 1)  # Schedule adding the first word after 0.5 seconds
 
     def add_next_word(self, dt):
-        if self.current_word_index < len(self.texts):
-            word = self.texts[self.current_word_index]
-            # Verifica se adicionar a palavra ultrapassa o limite de 50 caracteres por linha
-            if self.cont_letters + len(word) > 50:
-                self.text_label.text += '\n'  # Adiciona uma nova linha
-                self.cont_letters = 0
-            self.text_label.text += word + ' '  # Adiciona a palavra
-            self.current_word_index += 1
-            self.cont_letters += len(word) + 1
-            Clock.schedule_once(self.add_next_word, 1)  # Agendar a adição da próxima palavra após 0.1 segundos
-        else:
-            Clock.schedule_once(self.add_goodLuck, 2)
-            Clock.schedule_once(self.add_button, 5)
+        title = self.texts[0]
+        self.text = self.texts[1]
+
+        def add_text(dt):
+            if self.text_index < len(self.text):
+                if self.cont_limit >= self.limit_line:
+                    self.text_label.text += '\n'
+                    self.cont_limit = 0
+                self.text_label.text += self.text[self.text_index]
+                self.text_index += 1
+                self.cont_limit += 1
+                Clock.schedule_once(add_text, 0.1)  # Agendar a adição da próxima letra após 0.1 segundos
+            else:
+                Clock.schedule_once(self.add_goodLuck, 2)  # Agendar a adição de "Boa Sorte" após 2 segundos
+                Clock.schedule_once(self.add_button, 5)  # Agendar a adição do botão após 5 segundos
+
+        self.text_index = 0  # Inicia o índice para adicionar o texto
+        self.text_label.text = title + '\n'  # Adiciona o título diretamente
+        Clock.schedule_once(add_text, 0.1)  # Inicia a adição do texto letra por letra após 0.1 segundos
 
     def add_goodLuck(self, dt):
         msg = "Boa Sorte na sua Jornada!"
-        self.text_label.text += '\n' * 5
+        self.text_label.text += '\n'
         self.text_label.text += msg
 
     def add_button(self, dt):
@@ -80,6 +90,7 @@ class InteractiveScreen(Screen):
             button = Button(text="Clique aqui Para iniciar!", size_hint=(None, None), size=(200, 50),
                             pos_hint={'center_x': 0.5, 'center_y': 0.5})
             self.box_text.add_widget(button)
+
 
 class RPGTextApp(App):
     def build(self):
@@ -91,7 +102,7 @@ class RPGTextApp(App):
 
         return sm
 
+
 if __name__ == '__main__':
     app = RPGTextApp()
     app.run()
-

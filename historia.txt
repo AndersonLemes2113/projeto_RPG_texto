@@ -1,4 +1,4 @@
-###  "O Renascimento da Vingança"
+"O Renascimento da Vingança"
 
 
 Em um mundo medieval mergulhado no caos e habitado por diversas raças, como elfos, anões, orks e magos, um jovem chamado Aric vive uma infância marcada pela tragédia. Sua casa é destruída e sua família é brutalmente morta por um ork implacável quando ele ainda era criança. Aric, à beira da morte, é resgatado por um grupo de elfos e levado para um reino élfico onde é cuidado e treinado nas artes da guerra e da magia.
@@ -17,4 +17,3 @@ O final varia de acordo com as escolhas do jogador, revelando diferentes desfech
 
 Assim, "O Renascimento da Vingança" oferece uma experiência emocionante de RPG com uma história envolvente, exploração de um mundo fantástico e escolhas significativas que definem o destino de um herói em busca de justiça.
 
-###
