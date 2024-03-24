@@ -67,20 +67,28 @@ class ScreenTextsWrite(Screen):
     def __init__(self, **kwargs):
         super(ScreenTextsWrite, self).__init__(**kwargs)
         self.name = 'screentextswrite'
-        self.cont_text = 1
-        self.show_text_onScreen()
+        self.make_button()
 
-    def show_text_onScreen(self):
+    def make_button(self):
+        self.button_start = Button(text='Iniciar a História',on_release=self.initialize_screen)
+        self.add_widget(self.button_start)
+
+    def initialize_screen(self,dt):
+        self.remove_widget(self.button_start)
+        self.cont_text = 1
         self.text_font = TextsFound('historia.txt')
         self.texts = self.text_font.search_text()
-        self.text_label = Label(text='', halign='center', size_hint_y=None, height=50)
+
         self.scroll_view = ScrollView()
+        self.text_label = Label(text='',font_size=15, halign='center', size_hint_y=None, valign='center',height=40)
         self.box_text = BoxLayout(orientation='vertical', size_hint_y=None)
-        self.limit_line = 50
-        self.cont_limit = 0
         self.box_text.add_widget(self.text_label)
+        self.box_text.bind(minimum_height=self.box_text.setter('height'))
         self.scroll_view.add_widget(self.box_text)
         self.add_widget(self.scroll_view)
+
+        self.limit_line = 80
+        self.cont_limit = 0
         Clock.schedule_once(self.add_next_word, 1)  # Schedule adding the first word after 0.5 seconds
 
     def add_next_word(self, dt):
@@ -90,22 +98,32 @@ class ScreenTextsWrite(Screen):
         def add_text(dt):
             if self.text_index < len(self.text):
                 if self.cont_limit >= self.limit_line and self.text[self.text_index] == ' ':
+                    self.make_label()
                     self.text_label.text += '\n'
                     self.cont_limit = 0
                 self.text_label.text += self.text[self.text_index]
                 self.text_index += 1
                 self.cont_limit += 1
-                Clock.schedule_once(add_text, 0.1)  # Schedule adding the next letter after 0.1 seconds
+                Clock.schedule_once(add_text, 0.01)  # Schedule adding the next letter after 0.1 seconds
             else:
                 Clock.schedule_once(self.add_goodLuck, 2)  # Schedule adding "Good Luck" after 2 seconds
                 Clock.schedule_once(self.add_button, 5)  # Schedule adding the button after 5 seconds
 
         self.text_index = 0  # Start index to add text
+        self.make_label()
         self.text_label.text = title + '\n'  # Add title directly
         Clock.schedule_once(add_text, 0.1)  # Start adding text letter by letter after 0.1 seconds
 
+    def make_label(self,font_size=15,**kwargs):
+        font = font_size
+        label = Label(text='', font_size= 15,halign='center', size_hint_y=None, valign='center',height=40)
+        self.box_text.add_widget(label)
+        self.text_label = label
+        font_size = 15
+
     def add_goodLuck(self, dt):
-        msg = "Good Luck on your Journey!"
+        msg = "Boa sorte na sua jornada!"
+        self.make_label()
         self.text_label.text += '\n'
         self.text_label.text += msg
 
